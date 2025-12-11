@@ -15,3 +15,4 @@
 - AI-SDK
 - zod
 - coss-ui
+- docker for local development
