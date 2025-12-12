@@ -100,7 +100,7 @@ export default function UserButton({
       <DropdownMenuTrigger asChild>
         <Button
           variant="ghost"
-          className={`relative ${avatarSizes[size]} rounded-full p-0 hover:bg-accent`}
+          className={`relative ${avatarSizes[size]} hover:bg-accent cursor-pointer rounded-full p-0`}
           disabled={isLoading}
         >
           <Avatar className={avatarSizes[size]}>
@@ -115,7 +115,7 @@ export default function UserButton({
           {showBadge && (
             <Badge
               variant={badgeVariant}
-              className="absolute -bottom-1 -right-1 h-5 px-1 text-xs"
+              className="absolute -right-1 -bottom-1 h-5 px-1 text-xs"
             >
               {badgeText}
             </Badge>
@@ -125,23 +125,23 @@ export default function UserButton({
 
       <DropdownMenuContent className="w-64" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
-          <div className="flex flex-col space-y-2">
+          <div className="flex cursor-pointer flex-col space-y-2">
             <div className="flex items-center space-x-3">
               <Avatar className="h-12 w-12">
                 <AvatarImage
                   src={user.image || ""}
                   alt={user.name || "User avatar"}
                 />
-                <AvatarFallback className="bg-primary text-primary-foreground font-medium text-lg">
+                <AvatarFallback className="bg-primary text-primary-foreground text-lg font-medium">
                   {getUserInitials(user.name, user.email)}
                 </AvatarFallback>
               </Avatar>
               <div className="flex flex-col space-y-1">
-                <p className="text-sm font-medium leading-none">
+                <p className="text-sm leading-none font-medium">
                   {user.name || "User"}
                 </p>
                 {showEmail && user.email && (
-                  <p className="text-xs leading-none text-muted-foreground">
+                  <p className="text-muted-foreground text-xs leading-none">
                     {user.email}
                   </p>
                 )}
@@ -153,7 +153,7 @@ export default function UserButton({
               </div>
             </div>
             {showMemberSince && (
-              <p className="text-xs text-muted-foreground">
+              <p className="text-muted-foreground text-xs">
                 Member since {formatMemberSince(user.createdAt)}
               </p>
             )}
@@ -188,7 +188,7 @@ export default function UserButton({
         <DropdownMenuItem
           onClick={handleLogout}
           disabled={isLoading}
-          className="cursor-pointer text-destructive focus:text-destructive"
+          className="text-destructive focus:text-destructive cursor-pointer"
         >
           <LogOut className="mr-2 h-4 w-4" />
           {isLoading ? "Logging out..." : "Log out"}
