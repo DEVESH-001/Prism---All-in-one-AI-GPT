@@ -1,12 +1,11 @@
-import { mergeProps } from "@base-ui-components/react/merge-props";
-import { useRender } from "@base-ui-components/react/use-render";
+import * as React from "react"
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   MoreHorizontalIcon,
-} from "lucide-react";
+} from "lucide-react"
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button";
 
 function Pagination({
@@ -15,9 +14,10 @@ function Pagination({
 }) {
   return (
     <nav
+      role="navigation"
       aria-label="pagination"
-      className={cn("mx-auto flex w-full justify-center", className)}
       data-slot="pagination"
+      className={cn("mx-auto flex w-full justify-center", className)}
       {...props} />
   );
 }
@@ -28,8 +28,8 @@ function PaginationContent({
 }) {
   return (
     <ul
-      className={cn("flex flex-row items-center gap-1", className)}
       data-slot="pagination-content"
+      className={cn("flex flex-row items-center gap-1", className)}
       {...props} />
   );
 }
@@ -44,26 +44,19 @@ function PaginationLink({
   className,
   isActive,
   size = "icon",
-  render,
   ...props
 }) {
-  const defaultProps = {
-    "aria-current": isActive ? ("page") : undefined,
-    className: render
-      ? className
-      : cn(buttonVariants({
-      size,
-      variant: isActive ? "outline" : "ghost",
-    }), className),
-    "data-active": isActive,
-    "data-slot": "pagination-link",
-  };
-
-  return useRender({
-    defaultTagName: "a",
-    props: mergeProps(defaultProps, props),
-    render,
-  });
+  return (
+    <a
+      aria-current={isActive ? "page" : undefined}
+      data-slot="pagination-link"
+      data-active={isActive}
+      className={cn(buttonVariants({
+        variant: isActive ? "outline" : "ghost",
+        size,
+      }), className)}
+      {...props} />
+  );
 }
 
 function PaginationPrevious({
@@ -73,11 +66,11 @@ function PaginationPrevious({
   return (
     <PaginationLink
       aria-label="Go to previous page"
-      className={cn("max-sm:aspect-square max-sm:p-0", className)}
       size="default"
+      className={cn("gap-1 px-2.5 sm:pl-2.5", className)}
       {...props}>
-      <ChevronLeftIcon className="sm:-ms-1" />
-      <span className="max-sm:hidden">Previous</span>
+      <ChevronLeftIcon />
+      <span className="hidden sm:block">Previous</span>
     </PaginationLink>
   );
 }
@@ -89,11 +82,11 @@ function PaginationNext({
   return (
     <PaginationLink
       aria-label="Go to next page"
-      className={cn("max-sm:aspect-square max-sm:p-0", className)}
       size="default"
+      className={cn("gap-1 px-2.5 sm:pr-2.5", className)}
       {...props}>
-      <span className="max-sm:hidden">Next</span>
-      <ChevronRightIcon className="sm:-me-1" />
+      <span className="hidden sm:block">Next</span>
+      <ChevronRightIcon />
     </PaginationLink>
   );
 }
@@ -105,8 +98,8 @@ function PaginationEllipsis({
   return (
     <span
       aria-hidden
-      className={cn("flex min-w-7 justify-center", className)}
       data-slot="pagination-ellipsis"
+      className={cn("flex size-9 items-center justify-center", className)}
       {...props}>
       <MoreHorizontalIcon className="size-4" />
       <span className="sr-only">More pages</span>
@@ -122,4 +115,4 @@ export {
   PaginationPrevious,
   PaginationNext,
   PaginationEllipsis,
-};
+}
